@@ -5,10 +5,10 @@
         id        = "com.sheridan.imm.collective"
         version   = "3.0.1">
 
-    <name>Pad's App</name>
+    <name>Desert Fun</name>
 
     <description>
-        Mobile game to touch a target on your opponent's screen.
+        Mobile game to collect treasure and yummy's in the desert.
     </description>
 
     <author href="https://www.padminismith.com" email="p.smith.ux@gmail.com">
