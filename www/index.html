@@ -4,22 +4,13 @@
 <meta charset="utf-8" />
 <title>Desert Fun</title>
 
-<!-- Welcome to ZIM at https://zimjs.com - Code Creativity!                              -->
-<!-- ZIM runs on the HTML Canvas powered by JavaScript and CreateJS https://createjs.com -->
-<!-- Founded by Inventor Dan Zen - http://danzen.com - Canadian New Media Award Winner   -->
-<!-- ZIM is free to use. You can donate to help improve ZIM at https://zimjs.com/donate  -->
-<link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" rel="stylesheet">
-<!-- <script src="https://zimjs.org/cdn/1.2.4/createjs.js"></script> -->
-<!-- <script src="https://zimjs.org/cdn/10.8.0/zim.js"></script> -->
-<!-- use zimjs.com/distill for minified individual functions! -->
-
-<!-- <script src="https://zimjs.org/cdn/Box2dWeb-2.1.a.3.min.js"></script> -->
-<!-- <script src="https://zimjs.org/cdn/physics_2.0.js"></script> -->
-<!-- <script src="https://zimjs.com/ten/header.js"></script> -->
-<script src="https://zimjs.org/cdn/game_2.2.js"></script>
+<!-- <script src="https://zimjs.org/cdn/1.3.0/createjs.js"></script> -->
+<!-- <script src="https://zimjs.org/cdn/10.9.0/zim.js"></script> -->
+<!-- <script src="https://zimjs.org/cdn/game_2.2.js"></script> -->
 
 <script src="js/createjs.js"></script>
 <script src="js/zim.js"></script>
+<script src="js/game.js"></script>
 
 <script>
 
@@ -67,14 +58,11 @@ frame.on("ready", () => { // ES6 Arrow Function - like function(){}
 
     page1.triangle = new Triangle(60,60,60,"#FF40D3")
         .rot(90)
-        // .hov(1)
-        // .rot(90)
         .loc(400,400)
         .addTo(page1)
         .outline();
 
     page1.triangle.on("mousedown", () => {
-        // pages.go(page2, "right", "slide", 1000);
         pages.go(page2, "right");
     });
 
@@ -83,12 +71,6 @@ frame.on("ready", () => { // ES6 Arrow Function - like function(){}
     page2.backing = new Rectangle(page2.width, page2.height, "#00EBFF").addTo(page2);
 
     const world = new Container(page2.stageW,page2.stageH).center(page2);
-
-    // page2.triangle = new Triangle(160,160,160,dark)
-    //     .alp(.8)
-    //     .hov(1)
-    //     .rot(-90)
-    //     .loc(10,500, world);
 
     var ground = new Blob({
         points: [[163.9,-99.2,0,0,-22.4,0,50,0,"mirror"],[186.8,121.5,0,0,0,-50,0,50,"mirror"],[-160.6,150.6,0,0,50,0,-50,0,"mirror"],[-183.9,-71.1,0,0,0,50,0,-27.6,"mirror"],[2,-73.3,0,0,-89.8,-0.5,72.7,0.4]],
@@ -105,7 +87,6 @@ frame.on("ready", () => { // ES6 Arrow Function - like function(){}
         color: '#FACC71',
         interactive: false
         })
-        // .sca(3)
         .addTo(ground)
         .pos(0,-100,CENTER,BOTTOM)
         .ord(top)
@@ -154,16 +135,7 @@ frame.on("ready", () => { // ES6 Arrow Function - like function(){}
     }).loc(200,100, win);
 
 
-  //   Ticker.add(function(){
-  //     if (scorer.score == 10000){
-  //       zog("you win");
-  //       c.removeFrom();
-  //       Ticker.remove(ticker);
-  //       win.alp(1);
-  //   }
-  // }, true);
-
-    const ticker = Ticker.add(function(){
+   const ticker = Ticker.add(function(){
       if(cactus1.hitTestCircle(c) || cactus2.hitTestCircle(c) || skull1.hitTestCircle(c) || skull2.hitTestCircle(c) || bone1.hitTestCircle(c) || bone2.hitTestCircle(c) || cactus3.hitTestCircle(c)){
         c.removeFrom();
       };
@@ -242,7 +214,6 @@ frame.on("ready", () => { // ES6 Arrow Function - like function(){}
       location.reload();
     });
 
-    // Score
     new Label({
         text: "Score:",
         lineHeight: 50,
@@ -280,15 +251,12 @@ new Label({
 
         page1.setBounds(stageW, stageH);
         page1.backing.siz(stageW, stageH);
-        // page1.triangle.loc(stageW*.3, stageH*.3);
         page1.triangle.center();
 
         page2.setBounds(stageW, stageH);
         page2.backing.siz(stageW, stageH);
-        // page2.triangle.center();
 
         world.scaleTo(stage, 90, 90).centerReg().pos(0,0,CENTER,BOTTOM);
-        // backing.siz(stageW,stageH).pos(0,0,TOP,LEFT);
 
         pages.resize();
     })
