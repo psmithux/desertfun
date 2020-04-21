@@ -20,7 +20,7 @@ const width = null;
 const height = null;
 const color = "#00EBFF"; // ZIM colors like green, blue, pink, faint, clear, etc.
 const outerColor = dark; // any HTML colors like "violet", "#333", etc. are fine to use
-const assets = ['cactus1.png', 'cactus2.png', 'ground.png', 'skull1.png', 'skull2.png', 'skull4.png', 'bone1.png', 'bone2.png', 'background1.png', 'coin1.png', 'coin2.png', 'coin3.png', 'coin4.png', 'coin5.png', 'crown.png', 'money.png', 'necklace.png', 'taco.png', 'sombrero.png', 'tequila.png'];
+const assets = ['cactus1.png', 'cactus2.png', 'ground.png', 'skull1.png', 'skull2.png', 'skull4.png', 'bone1.png', 'bone2.png', 'background1.png', 'coin1.png', 'coin2.png', 'coin3.png', 'coin4.png', 'coin5.png', 'crown.png', 'money.png', 'necklace.png', 'taco.png', 'sombrero.png', 'tequila.png', 'eat.wav', 'coin.wav', 'bigmoney.wav', 'cheers.wav', 'maracas.wav'];
 const path = 'assets/';
 // as of ZIM 5.5.0 you do not need to put zim before ZIM functions and classes
 const frame = new Frame({scaling, width, height, color, outerColor, assets, path, sensors:true});
@@ -138,61 +138,73 @@ frame.on("ready", () => { // ES6 Arrow Function - like function(){}
         font: 'Permanent Marker'
     }).loc(200,100, win);
 
-
    const ticker = Ticker.add(function(){
       if(cactus1.hitTestCircle(c) || cactus2.hitTestCircle(c) || skull1.hitTestCircle(c) || skull2.hitTestCircle(c) || bone1.hitTestCircle(c) || bone2.hitTestCircle(c) || cactus3.hitTestCircle(c)){
         c.removeFrom();
       };
       if(crown.hitTestCircle(c)){
         crown.removeFrom();
+        asset("bigmoney.wav").play();
         scorer.score+=1500;
       }
       if(money.hitTestCircle(c)){
           money.removeFrom();
+          asset("bigmoney.wav").play();
           scorer.score+=1500;
       }
       if(necklace.hitTestCircle(c)){
           necklace.removeFrom();
+          asset("bigmoney.wav").play();
           scorer.score+=1000;
       }
       if(coin1.hitTestCircle(c)){
           coin1.removeFrom();
+          asset("coin.wav").play();
           scorer.score+=200;
       }
       if(coin2.hitTestCircle(c)){
           coin2.removeFrom();
+          asset("coin.wav").play();
           scorer.score+=200;
       }
       if(coin3.hitTestCircle(c)){
           coin3.removeFrom();
+          asset("coin.wav").play();
           scorer.score+=200;
       }
       if(coin4.hitTestCircle(c)){
           coin4.removeFrom();
+          asset("coin.wav").play();
           scorer.score+=200;
       }
       if(coin5.hitTestCircle(c)){
           coin5.removeFrom();
+          asset("coin.wav").play();
           scorer.score+=200;
       }
       if(taco.hitTestCircle(c)){
           taco.removeFrom();
+          asset("eat.wav").play();
           scorer.score+=1000;
       }
       if(taco2.hitTestCircle(c)){
           taco2.removeFrom();
+          asset("eat.wav").play();
           scorer.score+=1000;
       }
       if(taco3.hitTestCircle(c)){
           taco3.removeFrom();
+          asset("eat.wav").play();
           scorer.score+=1000;
       }
       if(sombrero.hitTestCircle(c)){
           sombrero.removeFrom();
+          asset("maracas.wav").play();
           scorer.score+=1000;
       }
       if(tequila.hitTestCircle(c)){
           tequila.removeFrom();
+          asset("cheers.wav").play();
           scorer.score+=1000;
       }
       if (scorer.score == 10000){
