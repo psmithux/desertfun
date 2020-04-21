@@ -20,7 +20,7 @@ const width = null;
 const height = null;
 const color = "#00EBFF"; // ZIM colors like green, blue, pink, faint, clear, etc.
 const outerColor = dark; // any HTML colors like "violet", "#333", etc. are fine to use
-const assets = ['cactus1.png', 'cactus2.png', 'ground.png', 'skull1.png', 'skull2.png', 'skull4.png', 'bone1.png', 'bone2.png', 'background1.png', 'coin1.png', 'coin2.png', 'coin3.png', 'coin4.png', 'coin5.png', 'crown.png', 'money.png', 'necklace.png', 'taco.png', 'sombrero.png', 'tequila.png', 'eat.wav', 'coin.wav', 'bigmoney.wav', 'cheers.wav', 'maracas.wav', 'backgroundmusic.mp3'];
+const assets = ['cactus1.png', 'cactus2.png', 'ground.png', 'skull1.png', 'skull2.png', 'skull4.png', 'bone1.png', 'bone2.png', 'background1.png', 'coin1.png', 'coin2.png', 'coin3.png', 'coin4.png', 'coin5.png', 'crown.png', 'money.png', 'necklace.png', 'taco.png', 'sombrero.png', 'tequila.png', 'eat.wav', 'coin.wav', 'bigmoney.wav', 'cheers.wav', 'maracas.wav', 'backgroundmusic.mp3', 'done.wav'];
 const path = 'assets/';
 // as of ZIM 5.5.0 you do not need to put zim before ZIM functions and classes
 const frame = new Frame({scaling, width, height, color, outerColor, assets, path, sensors:true});
@@ -135,9 +135,25 @@ frame.on("ready", () => { // ES6 Arrow Function - like function(){}
         font: 'Permanent Marker'
     }).loc(200,100, win);
 
+    const lose = new Rectangle(stageW,stageH, clear).center(world).alp(0);
+
+    new Label({
+      text: "Try Again!",
+        lineHeight: 50,
+        align: "center",
+        size: 200,
+        color: "#FF40D3",
+        font: 'Permanent Marker'
+    }).loc(200,100, lose);
+
    const ticker = Ticker.add(function(){
       if(cactus1.hitTestCircle(c) || cactus2.hitTestCircle(c) || skull1.hitTestCircle(c) || skull2.hitTestCircle(c) || bone1.hitTestCircle(c) || bone2.hitTestCircle(c) || cactus3.hitTestCircle(c)){
         c.removeFrom();
+        asset("done.wav").play();
+        zog("you lose");
+        lose.alp(1);
+        Ticker.remove(ticker);
+        stage.update();
       };
       if(crown.hitTestCircle(c)){
         crown.removeFrom();
@@ -257,7 +273,7 @@ var c = new Circle(15, black).center(page2).drag();
 var label = new Label().center().sca(.5).mov(-100,-200).top().outline().addTo(page2);
 frame.on("deviceorientation", function (e) {
     label.text = "x:" + Math.round(e.rotation.x) +", y: "+  Math.round(e.rotation.y) +", z: "+  Math.round(e.rotation.z);
-    c.loc(stageW/4+e.rotation.x*-4,stageH/4+e.rotation.y*4);
+    c.loc(stageH/2+e.rotation.y*4,stageW/2+e.rotation.x*-4);
     stage.update();
 });
 
