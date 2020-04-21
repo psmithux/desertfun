@@ -257,7 +257,7 @@ var c = new Circle(15, black).center(page2).drag();
 var label = new Label().center().sca(.5).mov(-100,-200).top().outline().addTo(page2);
 frame.on("deviceorientation", function (e) {
     label.text = "x:" + Math.round(e.rotation.x) +", y: "+  Math.round(e.rotation.y) +", z: "+  Math.round(e.rotation.z);
-    c.loc(stageH/4+e.rotation.y*4,stageW/4+e.rotation.x*-4);
+    c.loc(stageW/4+e.rotation.x*-4,stageH/4+e.rotation.y*4);
     stage.update();
 });
 
